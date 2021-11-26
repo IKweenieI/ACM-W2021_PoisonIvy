@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="optionsStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Settings</title>
+    <script src="jquery-3.6.0.min.js">
+      </script>
+    <script src="options.js">
+        </script>
+</head>
+
+<body>
+    <h1 class="settings-header">Settings</h1>
+    <p class="intro-para">We warn our users against using websites that employ children or practice animal cruelty and suggest indian
+    alternatives</p>
+    <h1 class="choose-options-header">Choose options for which you will be alerted</h1>
+    <div class="child-labour" >
+        <label for="child-labour">Child Labour</label>
+        <input type="checkbox" id="childLabour" name="child-labour" >
+
+    </div>
+    <div class="animal-cruelty">
+
+        <label for="animal-cruelty">Animal Cruelty</label><input type="checkbox" id="animalCruelty" name="animal-cruelty" >
+    </div>
+    <div class="indian-alternative"  >
+
+        <label for="indian-alternative">Indian Alternative</label> <input type="checkbox" id="indianAlternatives" name="indian-alternative" >
+    </div>
+    <!-- This is the feedback button it will not work in the prototype -->
+    <a href="#" class="feedback-button">Give us a Feedback!</a>
+</body>
+
+</html>
