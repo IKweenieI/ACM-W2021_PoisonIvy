@@ -1,0 +1,159 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* reset over */
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+    width: 400px;
+    margin: 5px;
+}
+
+.title-and-logo-class {
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#logo-of-web-police {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+#title-web-police {
+    font-size: 30px;
+    color: #00b4d8;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.version-info {
+    display: flex;
+    justify-content: center;
+    font-weight: 200;
+}
+
+#title-selected-options {
+    padding-left: 10px;
+    background: rgb(238, 238, 238);
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.gradient-underline {
+    position: relative;
+    text-decoration: none;
+}
+
+.gradient-underline:hover::after {
+    transition: 0.5s all;
+    background: linear-gradient(to left, #00b4d87e, #3A0CA37e);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+}
+
+.options-list-container {
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.options-list-container li a {
+    color: #00b4d8;
+    font-weight: 300;
+}
+
+.options-list-container li a:hover {
+    background: -webkit-linear-gradient(left, #00b4d8, #3A0CA3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.not-visible {
+    display: none;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+
+#options-button {
+    background: linear-gradient(to left, #00b4d8, #3A0CA3);
+    background-clip: border-box;
+    -webkit-background-clip: text, border;
+    color: transparent;
+    border: 1px solid transparent;
+    border-image: linear-gradient(to left, #3A0CA3, #00b4d8);
+    border-image-slice: 1;
+    margin-right: 15px;
+    padding: 7px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 5px #00b4d844;
+}
+
+#options-button:hover {
+    text-decoration: 1px white none;
+    box-shadow: 0px 0px 20px 5px #00b4d8d5;
+
+}
+
+.right-click-on-extension {
+    display: flex;
+    justify-content: center;
+    font-weight: 300;
+    font-size: 13px;
+}
