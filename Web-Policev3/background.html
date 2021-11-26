@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="optionsStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>background</title>
+
+
+</head>
+<script src=jquery-3.6.0.min.js type="module">
+</script>
+<script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCR5V-ff66aNMmOD-71z-mb2sq5IqZxCT8",
+            authDomain: "acm-web-police.firebaseapp.com",
+            databaseURL: "https://acm-web-police-default-rtdb.firebaseio.com",
+            projectId: "acm-web-police",
+            storageBucket: "acm-web-police.appspot.com",
+            messagingSenderId: "467718456845",
+            appId: "1:467718456845:web:b166fb0f0a6634ef343744",
+            measurementId: "G-8FJV78YZNL"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        //  my code now
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js";
+        const db = getDatabase();
+        // inserting new code here
+
+        //
+        console.log("reached background.js");
+        chrome.tabs.onUpdated.addListener(function (tabId, changedInfo, tab)
+        {
+            let newURL = changedInfo.url;
+            console.log("new url", newURL);
+            let changedURL = "";
+            if (newURL != undefined)
+            {
+                for (let j = 0; j < newURL.length; j++)
+                {
+                    if (/^[a-zA-Z]*$/.test(newURL[j]))
+                    {
+                        changedURL += newURL[j];
+                    }
+
+                }
+            }
+            console.log("changed url", changedURL);
+
+            const objFirebase = ref(db, changedURL);
+            onValue(objFirebase, (snapshot) =>
+            {
+                const data = snapshot.val();
+                //  if the entry exists in firebase then this will happen
+                if (data != null)
+                {
+                    console.log(data);
+                    var activityNumber = data.Activity;
+
+                    chrome.storage.local.get('ia', function (status)
+                        {
+                            var checked = status.ia;
+                            if (checked)
+                            {
+                              chrome.storage.local.set({ 'alt':data.Indian_Alternative }, function ()
+                              {
+                              });
+                            }
+                        });
+
+                        chrome.storage.local.get('pa', function (status)
+                        {
+                            var checked = status.pa;
+                            if (checked)
+                            {
+                                chrome.storage.local.set({ 'alt':data.Plastic_Alternatives }, function ()
+                                {
+                                });
+                            }
+                        });
+
+                        chrome.storage.local.get('ca', function (status)
+                        {
+                            var checked = status.ca;
+                            if (checked)
+                            {
+                                chrome.storage.local.set({ 'alt': data.Carbon_Emission }, function ()
+                                {
+                                });
+                            }
+                        });
+                    chrome.storage.local.get('cl', function (status)
+                    {
+                        var switchStatus = status.cl;
+                        if (parseInt(activityNumber) == 1 && switchStatus)
+                        {
+                            var URL = "http://127.0.0.1:8000/alrt1.html";
+                            window.open(URL, null);
+                        }
+                    });
+                    chrome.storage.local.get('ac', function (status)
+                    {
+                        var switchStatus = status.ac;
+                        //  checks if checkbox is ticked or not
+                        if (parseInt(activityNumber) == 2 && switchStatus)
+                        {
+                            var URL = "http://127.0.0.1:8000/alrt2.html";
+                            window.open(URL, null);
+                        }
+                    });
+
+
+                }
+            });
+
+        });
+
+
+
+
+
+
+        // terms and conditions function:
+        chrome.runtime.onInstalled.addListener(function(reason){
+        var URL = "http://127.0.0.1:8000/tandc.html";
+        window.open(URL,null);
+        });
+
+
+        //  check boxes
+
+        chrome.storage.onChanged.addListener(function (changes, areaName)
+        {
+            chrome.storage.local.get('cl', function (status)
+            {
+                var switchStatus = status.cl;
+
+                if (switchStatus)
+                {
+                    $('#childLabour').prop('checked', true);
+                } else
+                {
+                    $('#childLabour').prop('checked', false);
+                }
+            });
+        });
+        chrome.storage.onChanged.addListener(function (changes, areaName)
+        {
+            chrome.storage.local.get('ac', function (status)
+            {
+                var switchStatus = status.ac;
+
+                if (switchStatus)
+                {
+                    $('#animalCruelty').prop('checked', true);
+                } else
+                {
+                    $('#animalCruelty').prop('checked', false);
+                }
+            });
+        });
+        chrome.storage.onChanged.addListener(function (changes, areaName)
+        {
+            chrome.storage.local.get('ia', function (status)
+            {
+                var switchStatus = status.ia;
+
+                if (switchStatus)
+                {
+                    $('#indianAlternatives').prop('checked', true);
+                } else
+                {
+                    $('#indianAlternatives').prop('checked', false);
+                }
+            });
+        });
+        chrome.storage.onChanged.addListener(function (changes, areaName)
+        {
+            chrome.storage.local.get('pa', function (status)
+            {
+                var switchStatus = status.pa;
+
+                if (switchStatus)
+                {
+                    $('#plasticAlternatives').prop('checked', true);
+                } else
+                {
+                    $('#plasticAlternatives').prop('checked', false);
+                }
+            });
+        });
+        chrome.storage.onChanged.addListener(function (changes, areaName)
+        {
+            chrome.storage.local.get('ca', function (status)
+            {
+                var switchStatus = status.ca;
+
+                if (switchStatus)
+                {
+                    $('#carbonAlternatives').prop('checked', true);
+                } else
+                {
+                    $('#carbonAlternatives').prop('checked', false);
+                }
+            });
+        });
+
+</script>
+
+</html>

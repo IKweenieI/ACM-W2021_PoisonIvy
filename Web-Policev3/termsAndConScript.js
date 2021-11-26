@@ -1,0 +1,1 @@
+document.getElementById("continuebtn").addEventListener("click", function () { window.open('', '_self').close();})
